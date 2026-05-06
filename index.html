@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>donate me pls I'm begging you</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      background: #efefef;
+      color: #000;
+      margin: 0;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .wrap {
+      width: 520px;
+      max-width: 95%;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 6px;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 10px 0 4px;
+    }
+
+    .tagline {
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    hr { margin: 12px 0; }
+
+    fieldset {
+      border: 1px solid #999;
+      background: #f7f7f7;
+      padding: 6px;
+      margin-bottom: 12px;
+    }
+    legend {
+      font-size: 12px;
+      padding: 0 4px;
+    }
+    label {
+      display: inline-block;
+      margin: 3px 8px 3px 0;
+      cursor: pointer;
+    }
+
+    .panel { display: none; margin-top: 8px; }
+    .panel.active { display: block; }
+
+    .net {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+    .addr {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      background: #fff;
+      border: 1px dashed #aaa;
+      padding: 6px;
+      display: block;
+      word-break: break-all;
+      user-select: all;
+      margin: 4px 0;
+    }
+
+    input[type="button"] {
+      font-size: 12px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .qr-box { margin-top: 6px; display: none; }
+    .qr-box.open { display: block; }
+    .qr-box canvas, .qr-box img {
+      border: 1px solid #aaa;
+      display: block;
+    }
+    .qr-note { font-size: 10px; color: #777; margin-top: 3px; }
+
+    footer {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>На покушать</h1>
+  <div class="tagline">буду рада любой копейке :3</div>
+
+  <fieldset>
+    <legend>как хочешь поддержать?</legend>
+    <label><input type="radio" name="m" value="btc" checked onchange="go('btc')"> bitcoin</label>
+    <label><input type="radio" name="m" value="ton" onchange="go('ton')"> ton</label>
+    <label><input type="radio" name="m" value="trc20" onchange="go('trc20')"> usdt/trx</label>
+    <label><input type="radio" name="m" value="paypal" onchange="go('paypal')"> paypal</label>
+    <label><input type="radio" name="m" value="card" onchange="go('card')"> перевод по карте</label>
+  </fieldset>
+
+  <div class="panel active" id="panel-btc">
+    <h2>Bitcoin (BTC)</h2>
+    <b>адрес:</b><br>
+    <span class="addr" id="a-btc">bc1q49hyve2hec62chp8e64rdnv3pctl3xanugce9e</span>
+    <input type="button" value="скопировать" onclick="cp('a-btc',this)">
+    &nbsp;
+    <input type="button" value="показать qr-код" onclick="toggleQR(this,'qr-btc','bc1q49hyve2hec62chp8e64rdnv3pctl3xanugce9e')">
+    <div class="qr-box" id="qr-btc">
+      <div id="qr-btc-el"></div>
+      <div class="qr-note">отсканируй чтобы отправить btc</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-ton">
+    <h2>TON</h2>
+    <div class="net">сеть TON &bull; сюда можно отправить ton и usdt в сети ton</div>
+    <b>адрес:</b><br>
+    <span class="addr" id="a-ton">UQCV-UHtdpcFdwi_VmNpOrH225xfqodqTm1NmFlwQo50s9Pe</span>
+    <input type="button" value="скопировать" onclick="cp('a-ton',this)">
+    &nbsp;
+    <input type="button" value="показать qr-код" onclick="toggleQR(this,'qr-ton','UQCV-UHtdpcFdwi_VmNpOrH225xfqodqTm1NmFlwQo50s9Pe')">
+    <div class="qr-box" id="qr-ton">
+      <div id="qr-ton-el"></div>
+      <div class="qr-note">отсканируй чтобы отправить ton/usdt</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-trc20">
+    <h2>USDT/TRX (TRC20)</h2>
+    <div class="net">сеть TRON</div>
+    <b>адрес:</b><br>
+    <span class="addr" id="a-trc20">TE1rXd8TKzyrM1thSzVDyqMBX6baKnSuHB</span>
+    <input type="button" value="скопировать" onclick="cp('a-trc20',this)">
+    &nbsp;
+    <input type="button" value="показать qr-код" onclick="toggleQR(this,'qr-trc20','TE1rXd8TKzyrM1thSzVDyqMBX6baKnSuHB')">
+    <div class="qr-box" id="qr-trc20">
+      <div id="qr-trc20-el"></div>
+      <div class="qr-note">отсканируй чтобы отправить usdt/trx</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-paypal">
+    <h2>PayPal</h2>
+    <p style="color:#555;margin-bottom:8px;">кидай сколько хочется</p>
+    <a href="https://paypal.me/KoiAyame" target="_blank" rel="noopener noreferrer">paypal.me/KoiAyame</a>
+  </div>
+
+  <div class="panel" id="panel-card">
+    <h2>Перевод по номеру карты</h2>
+    <br>
+    <h2>Монобанк (UAH):</h2>
+    <span class="addr">4441114404110130</span>
+    <br>
+    <h2>Райффайзенбанк (RUB):</h2>
+    <span class="addr">2200300123856591</span>
+  </div>
+
+  <hr>
+  <footer>koi ayame &bull; 2026</footer>
+
+</div>
+<script>
+  function go(id) {
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+
+  function cp(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).textContent.trim()).then(function() {
+      btn.value = 'скопировано!';
+      setTimeout(function(){ btn.value = 'скопировать'; }, 2000);
+    });
+  }
+
+  var done = {};
+  function toggleQR(btn, boxId, addr) {
+    var box = document.getElementById(boxId);
+    var open = box.classList.contains('open');
+    box.classList.toggle('open', !open);
+    btn.value = open ? 'показать qr-код' : 'скрыть qr-код';
+    if (!open && !done[boxId]) {
+      done[boxId] = true;
+      new QRCode(document.getElementById(boxId + '-el'), {
+        text: addr, width: 148, height: 148,
+        colorDark: '#000', colorLight: '#fff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
+  }
+</script>
+</body>
+</html>
