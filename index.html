@@ -85,6 +85,22 @@
       cursor: pointer;
     }
 
+    .notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #fff8e1;
+      border-left: 4px solid #f9a825;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .notice p {
+      margin: 0;
+    }
+
     .qr-box { margin-top: 6px; display: none; }
     .qr-box.open { display: block; }
     .qr-box canvas, .qr-box img {
@@ -116,6 +132,7 @@
     <label><input type="radio" name="m" value="trc20" onchange="go('trc20')"> usdt/trx</label>
     <label><input type="radio" name="m" value="paypal" onchange="go('paypal')"> paypal</label>
     <label><input type="radio" name="m" value="card" onchange="go('card')"> перевод по карте</label>
+    <label><input type="radio" name="m" value="bank" onchange="go('bank')"> банковский перевод</label>
   </fieldset>
 
   <div class="panel active" id="panel-btc">
@@ -170,9 +187,32 @@
     <br>
     <h2>Монобанк (UAH):</h2>
     <span class="addr">4441114404110130</span>
+    <span class="net">Отримувач: Гузь Олександр Валерійович</span>
     <br>
     <h2>VISA Instant (EUR):</h2>
     <span class="addr">4410290117374283</span>
+    <span class="net">Receiver: Klesov Ivan</span>
+    <div class="notice">
+      <span>ℹ️</span>
+      <p>Карты принадлежат третьим лицам — доверенным посредникам, которые перешлют средства получателю.</p>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-bank">
+    <h2>Банковский перевод</h2>
+    <br>
+    <h2>IBAN:</h2>
+    <span class="addr">GR8101720730005073112035236</span>
+    <h2>BIC/SWIFT:</h2>
+    <span class="addr">PIRBGRAA</span>
+    <h2>Beneficiary:</h2>
+    <span class="addr">KLESOV,IVAN,ANTON</span>
+    <br>
+    <h2>Учтите, что переводы могут идти от нескольких часов и нескольких дней.</h2>
+    <div class="notice">
+      <span>ℹ️</span>
+      <p>Счёт принадлежит третьему лицу — доверенному посреднику, который перешлёт средства получателю.</p>
+    </div>
   </div>
 
   <hr>
