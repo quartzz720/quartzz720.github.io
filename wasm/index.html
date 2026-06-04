@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasmOS</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: monospace;
+        }
+        #screen {
+            background-color: #000;
+            border: 4px solid #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            image-rendering: pixelated;
+            cursor: none; /* Hide real cursor over OS */
+        }
+        .info {
+            margin-top: 10px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>WasmOS (Kolibri-inspired)</h1>
+    <canvas id="screen" width="800" height="600"></canvas>
+    
+    <div style="text-align: center; margin-top: 15px;">
+        <button onclick="bootOS()" style="padding: 10px 20px; font-size: 16px; margin: 0 5px; cursor: pointer;">Power On</button>
+        <button onclick="rebootOS()" style="padding: 10px 20px; font-size: 16px; margin: 0 5px; cursor: pointer;">Reset System</button>
+    </div>
+
+    <div class="info">Press F12 for console. Booting from WebAssembly...</div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
